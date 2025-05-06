@@ -1,24 +1,29 @@
 <?php
-function getRandomText($level) {
-    $words = file('words.txt', FILE_IGNORE_NEW_LINES);
-    shuffle($words);
-
-    $count = [
-        'easy' => 50,
-        'medium' => 100,
-        'hard' => 150,
-        'hardcore' => 300
+function getWordsForLevel($level) {
+    $files = [
+        'easy' => 'words_easy.txt',
+        'medium' => 'words_medium.txt',
+        'hard' => 'words_hard.txt',
+        'hardcore' => 'words_hardcore.txt',
     ];
 
-    $selected = array_slice($words, 0, $count[$level]);
-    return implode(' ', $selected);
+    if (!isset($files[$level])) {
+        http_response_code(400);
+        echo "Nepareizs līmenis!";
+        exit;
+    }
+
+    $lines = file($files[$level], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    shuffle($lines); // nejauša secība
+    return implode(' ', $lines);
 }
 
 if (isset($_GET['level'])) {
-    echo getRandomText($_GET['level']);
+    echo getWordsForLevel($_GET['level']);
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="lv">
 <head>

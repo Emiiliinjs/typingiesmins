@@ -4,7 +4,7 @@ bright
 morning
 birds
 sing
-trees
+iesmins
 sway
 gently
 wind
@@ -23,7 +23,7 @@ dogs
 play
 friends
 gather
-vasilijs
+vasilijs    
 share
 stories
 picnic
